@@ -56,6 +56,20 @@ function GetAllFoodItems() {
     foodrequest.send();
 };
 
+function GetBillTotal() {
+    let billrequest = new XMLHttpRequest();
+    billrequest.open('GET', 'http://tiy-28202.herokuapp.com//bill?MacsTable');
+    billrequest.addEventListener('load', function(){
+        let billresponse = JSON.parse(billrequest.responseText);
+        console.log(billresponse);
+
+    for (let loop = 0; loop < billresponse.length; loop++) {
+        let billtotal = billresponse[loop];
+        }
+    });
+    billrequest.send();
+}; 
+
 function GenerateMenuDisplay(variable) {
 
     let docparent = document.querySelector('body ul');
@@ -65,12 +79,21 @@ function GenerateMenuDisplay(variable) {
     let itemname = document.createElement('p');
     itemname.textContent = variable.name;
 
+    let itemprice = document.createElement('p');
+    itemprice.textContent = variable.price;
+
+    let btn = document.createElement('button');
+    btn.textContent = 'Order!';
+
     docparent.appendChild(itemcontainer);
     itemcontainer.appendChild(itemname);
+    itemcontainer.appendChild(itemprice);
+    itemcontainer.appendChild(btn);
 }
+
 
 window.addEventListener('load', function () {
 
     GetAllFoodItems();
 
-});
+}); 
