@@ -1,37 +1,3 @@
-
-/* let fooditem = [
-    {
-    id: 'number',
-    name: 'string',
-    description: 'string',
-    price: 'number',
-    available: 'boolean t/f',
-    },
-
-    {
-    id: 'number',
-    name: 'string',
-    description: 'string',
-    price: 'number',
-    available: 'boolean t/f',
-    },
-    {
-    id: 'number',
-    name: 'string',
-    description: 'string',
-    price: 'number',
-    available: 'boolean t/f',
-    },
-    {
-    id: 'number',
-    name: 'string',
-    description: 'string',
-    price: 'number',
-    available: 'boolean t/f',
-    },
-] */
-
-
 function GetAllFoodItems() {
 
     let foodrequest = new XMLHttpRequest();
