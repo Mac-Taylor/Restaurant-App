@@ -31,6 +31,7 @@
     },
 ] */
 
+
 function GetAllFoodItems() {
 
     let foodrequest = new XMLHttpRequest();
@@ -58,7 +59,7 @@ function GetAllFoodItems() {
 
 function GetBillTotal() {
     let billrequest = new XMLHttpRequest();
-    billrequest.open('GET', 'http://tiy-28202.herokuapp.com//bill?MacsTable');
+    billrequest.open('GET', 'http://tiy-28202.herokuapp.com//bill?table_id=MacsTable');
     billrequest.addEventListener('load', function(){
         let billresponse = JSON.parse(billrequest.responseText);
         console.log(billresponse);
@@ -66,6 +67,7 @@ function GetBillTotal() {
     for (let loop = 0; loop < billresponse.length; loop++) {
         let billtotal = billresponse[loop];
         }
+        GenerateMenuDisplay(billresponse[loop]);
     });
     billrequest.send();
 }; 
@@ -91,9 +93,9 @@ function GenerateMenuDisplay(variable) {
     itemcontainer.appendChild(btn);
 }
 
-
 window.addEventListener('load', function () {
 
     GetAllFoodItems();
+    GetBillTotal();
 
 }); 
