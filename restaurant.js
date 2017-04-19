@@ -24,8 +24,6 @@ function GetFoodItems() {
 }
 
 
-
-
 window.addEventListener('load', function() {
 
     GetFoodItems();
