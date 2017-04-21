@@ -1,5 +1,7 @@
 
+
 function GetAllFoodItems() {
+
 
     let foodrequest = new XMLHttpRequest();
     foodrequest.open('GET', 'http://tiy-28202.herokuapp.com/menu');
@@ -22,19 +24,23 @@ function GetAllFoodItems() {
         };
     });
     foodrequest.send();
-};
+}; // function to define 'GET' request to pull menu/food data from the API
 
 function GetBillTotal() {
     let billrequest = new XMLHttpRequest();
-    billrequest.open('GET', 'http://tiy-28202.herokuapp.com//bill?table_id=<table_id>');
+    billrequest.open('GET', 'http://tiy-28202.herokuapp.com/bill?table_id=Mac');
     billrequest.addEventListener('load', function(){
+        let billtotal = 0;
         let billresponse = JSON.parse(billrequest.responseText);
         console.log(billresponse);
 
-    for (let loop = 0; loop < billresponse.length; loop++) {
-        let billtotal = billresponse[loop];
-        }
-        GenerateMenuDisplay(billresponse[loop]);
+    for (let loop = 0; loop < billresponse.items.length; loop++) {
+        billtotal = billtotal + billresponse.items[loop].price;
+    }
+
+    console.log(billtotal)
+
+        // GenerateMenuDisplay(billresponse[loop]);
     });
     billrequest.send();
 }; 
@@ -53,16 +59,24 @@ function GenerateMenuDisplay(variable) {
 
     let btn = document.createElement('button');
     btn.textContent = 'Order!';
+    btn.addEventListener('click', function(){
+        let request = new XMLHttpRequest();
+        request.open('POST', 'http://tiy-28202.herokuapp.com/order'); //http://tiy-28202.herokuapp.com/order
+         request.addEventListener('load', function(){
+            GetBillTotal();
+        })
+        request.send(JSON.stringify({table_id: 'Mac', menu_id: variable.id}));
+
+    });
 
     docparent.appendChild(itemcontainer);
     itemcontainer.appendChild(itemname);
     itemcontainer.appendChild(itemprice);
     itemcontainer.appendChild(btn);
-}
+} // Why does this show up without calling it? 
 
 window.addEventListener('load', function () {
 
     GetAllFoodItems();
     GetBillTotal();
-
-}); 
+}); // Event listener for when the page loads
