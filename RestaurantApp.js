@@ -43,7 +43,7 @@ function GetBillTotal() {
         // GenerateMenuDisplay(billresponse[loop]);
     });
     billrequest.send();
-}; 
+}; // function to get the number value of the total of all the item prices in the order, the bill total.
 
 function GenerateMenuDisplay(variable) {
 
@@ -73,10 +73,11 @@ function GenerateMenuDisplay(variable) {
     itemcontainer.appendChild(itemname);
     itemcontainer.appendChild(itemprice);
     itemcontainer.appendChild(btn);
-} // Why does this show up without calling it? 
+} // Why does this show up without calling it? Answer = it is being called inside the other functions that 
+  // that are called in the 'load' event listenener
 
 window.addEventListener('load', function () {
-
     GetAllFoodItems();
     GetBillTotal();
 }); // Event listener for when the page loads
+
